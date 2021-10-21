@@ -1,0 +1,103 @@
+
+
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-7 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/links/pregunta1" method="POST">
+                        <h5 class="card-title">Pregunta 1</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">¿Cuál crees que es el principal motivo de la deserción?</h6>
+                        <div class="form-check" id="area-of-interest-1">
+                            <input class="form-check-input" type="radio" name="p1" value="academico">
+                            <label class="form-check-label" for="academico">
+                                Academico
+                            </label>
+                        </div>
+                        <div class="form-check" id="area-of-interest-2">
+                            <input class="form-check-input" type="radio" name="p1" value="salud">
+                            <label class="form-check-label" for="salud">
+                                Salud
+                            </label>
+                        </div>   
+                        <div class="form-check" id="area-of-interest-3">
+                            <input class="form-check-input" type="radio" name="p1" value="cambio_carrera">
+                            <label class="form-check-label" for="cambio_carrera">
+                                Cambio de Carrera
+                            </label>
+                        </div>  
+                        <div class="form-check" id="area-of-interest-4">
+                            <input class="form-check-input" type="radio" name="p1" value="cambio_universidad">
+                            <label class="form-check-label" for="cambio_universidad">
+                                Cambio de Universidad
+                            </label>
+                        </div>  
+                        <div class="form-check" id="area-of-interest-5">
+                            <input class="form-check-input" type="radio" name="p1" value="economico">
+                            <label class="form-check-label" for="economico">
+                                Economico
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-fluid col-12 mt-2">
+                                Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="time-message">
+		<h1>
+			Llevas en esta pagina <span id="timeInSeconds">0</span> <span> segundos</span>
+		</h1>
+	</div>
+Interactúo en la primera pregunta <span id="area-of-interest-time-1"></span> segundos. <br/>
+Interactúo en la segunda pregunta <span id="area-of-interest-time-2"></span> segundos. <br/>
+Interactúo en la tercera pregunta <span id="area-of-interest-time-3"></span> segundos. <br/>
+Interactúo en la cuarta pregunta <span id="area-of-interest-time-4"></span> segundos. <br/>
+Interactúo en la quinta pregunta <span id="area-of-interest-time-5"></span> segundos. <br/>
+
+
+<script src="/timeme.min.js"></script>
+<script type="text/javascript">
+    TimeMe.initialize({
+        currentPageName: "pregunta1", // current page
+        idleTimeoutInSeconds: 10, // stop recording time due to inactivity
+        websocketOptions: { 
+            websocketHost: "ws://localhost:4000",
+            appId: "timeInSeconds"
+        }
+    });
+
+    window.onload = function () {
+        TimeMe.trackTimeOnElement('area-of-interest-1');
+        TimeMe.trackTimeOnElement('area-of-interest-2');
+        TimeMe.trackTimeOnElement('area-of-interest-3');
+        TimeMe.trackTimeOnElement('area-of-interest-4');
+        TimeMe.trackTimeOnElement('area-of-interest-5');
+        setInterval(function () {
+            let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+            document.getElementById('timeInSeconds').textContent = timeSpentOnPage.toFixed(2);
+
+            let timeSpentOnElement = TimeMe.getTimeOnElementInSeconds('area-of-interest-1');
+            document.getElementById('area-of-interest-time-1').textContent = timeSpentOnElement.toFixed(2);
+
+            let timeSpentOnElement2 = TimeMe.getTimeOnElementInSeconds('area-of-interest-2');
+            document.getElementById('area-of-interest-time-2').textContent = timeSpentOnElement2.toFixed(2);
+
+            let timeSpentOnElement3 = TimeMe.getTimeOnElementInSeconds('area-of-interest-3');
+            document.getElementById('area-of-interest-time-3').textContent = timeSpentOnElement3.toFixed(2);
+            
+            let timeSpentOnElement4 = TimeMe.getTimeOnElementInSeconds('area-of-interest-4');
+            document.getElementById('area-of-interest-time-4').textContent = timeSpentOnElement4.toFixed(2);
+
+            let timeSpentOnElement5 = TimeMe.getTimeOnElementInSeconds('area-of-interest-5');
+            document.getElementById('area-of-interest-time-5').textContent = timeSpentOnElement5.toFixed(2);
+
+        }, 37);
+    }
+</script>
+

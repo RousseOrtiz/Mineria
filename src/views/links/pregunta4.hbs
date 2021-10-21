@@ -1,0 +1,67 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-7 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/links/pregunta4" method="POST">
+                        <h5 class="card-title">Pregunta 4</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">¿Conoces a alguien que haya desertado?</h6>
+                        <div class="form-check" id="area-of-interest-1">
+                            <input class="form-check-input" type="radio" name="p4" value="si">
+                            <label class="form-check-label" for="si">
+                                Sí
+                            </label>
+                        </div>
+                        <div class="form-check" id="area-of-interest-2">
+                            <input class="form-check-input" type="radio" name="p4" value="no">
+                            <label class="form-check-label" for="no">
+                                No
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-fluid col-12 mt-2">
+                                Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="time-message">
+		<h1>
+			Llevas en esta pagina <span id="timeInSeconds">0</span> <span> segundos</span>
+		</h1>
+	</div>
+Interactúo en la primera pregunta <span id="area-of-interest-time-1"></span> segundos. <br/>
+Interactúo en la segunda pregunta <span id="area-of-interest-time-2"></span> segundos. <br/>
+
+<script src="/timeme.min.js"></script>
+<script type="text/javascript">
+    TimeMe.initialize({
+        currentPageName: "pregunta4", // current page
+        idleTimeoutInSeconds: 10, // stop recording time due to inactivity
+        websocketOptions: { 
+            websocketHost: "ws://localhost:4000",
+            appId: "timeInSeconds"
+        }
+    });
+
+    window.onload = function () {
+        TimeMe.trackTimeOnElement('area-of-interest-1');
+        TimeMe.trackTimeOnElement('area-of-interest-2');
+        setInterval(function () {
+            let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+            document.getElementById('timeInSeconds').textContent = timeSpentOnPage.toFixed(2);
+
+            let timeSpentOnElement = TimeMe.getTimeOnElementInSeconds('area-of-interest-1');
+            document.getElementById('area-of-interest-time-1').textContent = timeSpentOnElement.toFixed(2);
+
+            let timeSpentOnElement2 = TimeMe.getTimeOnElementInSeconds('area-of-interest-2');
+            document.getElementById('area-of-interest-time-2').textContent = timeSpentOnElement2.toFixed(2);
+
+        }, 37);
+    }
+</script>
